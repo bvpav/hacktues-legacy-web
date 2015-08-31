@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  captain_id: 1
+  members_id: MyText
+  project_name: MyString
+  project_desc: MyText
+  technologies: MyText
+
+two:
+  name: MyString
+  captain_id: 1
+  members_id: MyText
+  project_name: MyString
+  project_desc: MyText
+  technologies: MyText

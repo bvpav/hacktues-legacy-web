@@ -1,0 +1,19 @@
+<footer class="footer">
+  <small>
+    <p>
+      <%= link_to 'http://rubyonrails.org/' do %>
+        <%= image_tag("rails-gem.png", alt: "Rails gem", height: "20px") %>
+        Ruby on Rails
+      <% end %>
+      (Версия: <%= Rails::VERSION::STRING %>,
+      Среда: <%= Rails.env.capitalize %>)
+    </p>
+  </small>
+  <nav>
+    <ul>
+      <li><%= link_to "Facebook", "https://www.facebook.com/HackTUES" %></li>
+      <li><%= link_to "GitHub", "https://github.com/HackTUES/" %></li>
+      <li><%= link_to "MIT License", "http://opensource.org/licenses/MIT" %></li>
+    </ul>
+  </nav>
+</footer>
