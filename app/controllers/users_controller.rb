@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     if @user.save
       @user.send_activation_email
       flash[:info] = "Провери си пощата за линк за активация."
-      redirect_to root
+      #redirect_to root
     else
       render 'new'
     end
