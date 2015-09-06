@@ -16,6 +16,6 @@ Rails.application.routes.draw do
                                          :destroy]
   get 'invites/send-invite'   => 'teams#invite'
   get 'invites/cancel-invite' => 'teams#cancel_invite'
-  get 'invites/accept-invite' => 'teams#accept-invite'
+  get 'invites/accept-invite' => 'teams#accept_invite'
   get '/:id'       => 'pages#show'
 end
