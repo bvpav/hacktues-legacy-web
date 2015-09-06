@@ -20,7 +20,7 @@
         <%= link_to "Отмени покана", {:controller => :teams, :action =>
         :cancel_invite, :from_id => current_user.id, :to_id => params[:id] }%>
       <% elsif @current_user_team.any? %>
-        <%= link_to "Покани", {:controller => :teams, :action => :invite,
+        <%= link_to "Покани", {:controller => :teams, :action => :send_invite,
         :from_id => current_user.id, :to_id => params[:id] }%>
       <% else %>
         <span class="label label-default">

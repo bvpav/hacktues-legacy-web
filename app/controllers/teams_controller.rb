@@ -27,7 +27,7 @@ class TeamsController < ApplicationController
     end
   end
 
-  def invite
+  def send_invite
     @invite = Invite.new(invite_params)
     if @invite.save
       flash[:success] = "Успешно поканен участник."
