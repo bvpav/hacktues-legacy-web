@@ -27,10 +27,44 @@ class TeamsController < ApplicationController
     end
   end
 
+  def invite
+    @invite = Invite.new(invite_params)
+    if @invite.save
+      flash[:success] = "Успешно поканен участник."
+      redirect_to User.find(params[:to_id])
+    else
+      redirect_to root
+    end
+  end
+
+  def cancel_invite
+    Invite.find_by(from_id: params[:from_id], to_id: params[:to_id]).destroy
+    flash[:success] = "Успешно отменена покана."
+    redirect_to User.find(params[:to_id])
+  end
+
+  def accept_invite
+
+  end
+
   def destroy
     Team.find(params[:id]).destroy
     flash[:success] = "Отбор изтрит."
     redirect_to teams_url
+  end
+
+  def edit
+    @team = Team.find(params[:id])
+  end
+
+  def update
+    @team = Team.find(params[:id])
+    if @team.update_attributes(team_params)
+      flash[:success] = "Успешно обновяване на отбора."
+      redirect_to "/teams/#{@team.id}"
+    else
+      render 'edit'
+    end
   end
 
   private
@@ -38,6 +72,10 @@ class TeamsController < ApplicationController
     def team_params
       params.require(:team).permit(:name, :project_name, :project_desc,
                                    :captain_id)
+    end
+
+    def invite_params
+      params.permit(:from_id, :to_id)
     end
 
     # Before filters

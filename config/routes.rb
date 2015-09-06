@@ -10,8 +10,12 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :teams               #only: [:index, :show]
+  resources :teams
+  patch 'team.:id' => 'teams#update'
   resources :pages,               only: [:new, :create, :edit, :update,
                                          :destroy]
+  get 'teams/invite'    => 'teams#invite'
+  get 'teams/cancel-invite' => 'teams#cancel_invite'
+  get 'teams/accept-invite' => 'teams#accept-invite'
   get '/:id'       => 'pages#show'
 end

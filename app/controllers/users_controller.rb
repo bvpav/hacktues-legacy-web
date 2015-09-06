@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :show, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
@@ -9,8 +9,21 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    if @user == current_user && @user.team_id == nil
+      @invites = Invite.where(to_id: @user.id)
+      if @invites.any?
+        @invites.each do |invite|
+          @from_user = User.find(invite.from_id)
+          @from_team = Team.find(@from_user.team_id)
+          flash.now[:info] = "Покана от #{@from_user.name} за #{@from_team.name}
+          <span class='label label-success'>Приеми</span>
+          <span class='label label-danger'>Откажи</span>".html_safe
+        end
+      end
+    end
+    @current_user_team = Team.where(captain_id: current_user.id)
     get_team
-
+    @invite = Invite.where(from_id: current_user.id, to_id: params[:id])
   end
 
   def new

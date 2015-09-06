@@ -16,6 +16,16 @@
       <h4>Без отбор</h4>
       <% if current_user?(@user) %>
         <%= link_to "Създай", new_team_path %>
+      <% elsif @invite.any? %>
+        <%= link_to "Отмени покана", {:controller => :teams, :action =>
+        :cancel_invite, :from_id => current_user.id, :to_id => params[:id] }%>
+      <% elsif @current_user_team.any? %>
+        <%= link_to "Покани", {:controller => :teams, :action => :invite,
+        :from_id => current_user.id, :to_id => params[:id] }%>
+      <% else %>
+        <span class="label label-default">
+          Създай си отбор, за да поканиш този участник.
+        </span>
       <% end %>
     <% end %>
   </div>

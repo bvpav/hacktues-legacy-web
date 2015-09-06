@@ -16,6 +16,14 @@ $gray-medium-light: #eaeaea;
 body {
   padding-top: 60px;
 }
+@media (max-width: 768px) {
+  body {
+    padding-top: 300px;
+  }
+  nav li {
+    clear: both;
+  }
+}
 
 section {
   overflow: auto;
@@ -98,6 +106,9 @@ footer {
     li {
       float: left;
       margin-left: 15px;
+    }
+    @media (max-width: 768px) {
+      float: left;
     }
   }
 }
