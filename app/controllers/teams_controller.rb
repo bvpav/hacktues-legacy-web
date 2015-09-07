@@ -44,7 +44,18 @@ class TeamsController < ApplicationController
   end
 
   def accept_invite
+    @accepting_user = User.find(params[:to_id])
+    @sending_user   = User.find(params[:from_id])
+    @accepting_user.update(team_id: @sending_user.team_id)
+    Invite.find_by(from_id: params[:from_id], to_id: params[:to_id]).destroy
+    flash[:success] = "Успешно приета покана."
+    redirect_to User.find(params[:to_id])
+  end
 
+  def decline_invite
+    Invite.find_by(from_id: params[:from_id], to_id: params[:to_id]).destroy
+    flash[:success] = "Успешно отказана покана."
+    redirect_to User.find(params[:to_id])
   end
 
   def destroy

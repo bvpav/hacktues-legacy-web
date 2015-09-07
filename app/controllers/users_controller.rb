@@ -16,8 +16,12 @@ class UsersController < ApplicationController
           @from_user = User.find(invite.from_id)
           @from_team = Team.find(@from_user.team_id)
           flash.now[:info] = "Покана от #{@from_user.name} за #{@from_team.name}
-          <span class='label label-success'>Приеми</span>
-          <span class='label label-danger'>Откажи</span>".html_safe
+          <a href='/invites/accept?from_id=#{invite.from_id}&to_id=#{invite.to_id}'>
+            <span class='label label-success'>Приеми</span>
+          </a>
+          <a href='/invites/decline?from_id=#{invite.from_id}&to_id=#{invite.to_id}'>
+            <span class='label label-danger'>Откажи</span>
+          </a>".html_safe
         end
       end
     end

@@ -14,8 +14,10 @@ Rails.application.routes.draw do
   patch 'team.:id' => 'teams#update'
   resources :pages,               only: [:new, :create, :edit, :update,
                                          :destroy]
-  get 'invites/send'   => 'teams#send_invite'
-  get 'invites/cancel' => 'teams#cancel_invite'
-  get 'invites/accept' => 'teams#accept_invite'
-  get '/:id'       => 'pages#show'
+  get 'invites/send'    => 'teams#send_invite'
+  get 'invites/cancel'  => 'teams#cancel_invite'
+  get 'invites/accept'  => 'teams#accept_invite'
+  get 'invites/decline' => 'teams#decline_invite'
+
+  get '/:id' => 'pages#show'
 end
