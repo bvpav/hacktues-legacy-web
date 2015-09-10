@@ -1,0 +1,17 @@
+<% provide(:title, 'Блог') %>
+
+<% if current_user && current_user.admin? %>
+  <%= link_to new_article_path do %>
+    <span class="glyphicon glyphicon-plus"></span> Добави статия
+  <% end %>
+<% end %>
+
+<h1>Блог</h1>
+
+<%= will_paginate %>
+
+<ul class="teams">
+      <%= render @articles %>
+</ul>
+
+<%= will_paginate %>

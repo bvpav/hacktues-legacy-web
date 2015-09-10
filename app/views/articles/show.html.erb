@@ -1,0 +1,17 @@
+<% provide(:title, @article.title) %>
+
+<% if current_user && current_user.admin? %>
+  <div class="page-controls">
+    <%= link_to '<button class="btn btn-default">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </button>'.html_safe, edit_article_path  %>
+
+    <%= button_to @article, class: "btn btn-default", method: :delete,
+                                  data: { confirm: "Сигурен?" } do %>
+      <span class="glyphicon glyphicon-remove"></span>
+    <% end %>
+  </div>
+<% end %>
+<h1><%= @article.title %></h1>
+
+<%= raw @article.content %>

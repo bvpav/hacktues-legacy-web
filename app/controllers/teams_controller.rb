@@ -9,6 +9,7 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @captain = User.find(@team.captain_id)
+    @members = @team.members_id
   end
 
   def new
@@ -44,9 +45,13 @@ class TeamsController < ApplicationController
   end
 
   def accept_invite
-    @accepting_user = User.find(params[:to_id])
     @sending_user   = User.find(params[:from_id])
+    @accepting_user = User.find(params[:to_id])
     @accepting_user.update(team_id: @sending_user.team_id)
+    @team = Team.find(@sending_user.team_id)
+    @members = @team.members_id
+    @members.push(@accepting_user.id)
+    @team.update(members_id: @members)
     Invite.find_by(from_id: params[:from_id], to_id: params[:to_id]).destroy
     flash[:success] = "Успешно приета покана."
     redirect_to User.find(params[:to_id])
@@ -58,8 +63,24 @@ class TeamsController < ApplicationController
     redirect_to User.find(params[:to_id])
   end
 
+  def leave
+    @user = current_user
+    @team = Team.find(params[:id])
+    @user.update(team_id: nil)
+    @new_members = @team.members_id - [@user.id]
+    @team.update(members_id: @new_members)
+    flash[:success] = "Успешно напускане на отбор."
+    redirect_to @user
+  end
+
   def destroy
-    Team.find(params[:id]).destroy
+    @team = Team.find(params[:id])
+    User.find(@team.captain_id).update(team_id: nil)
+    @members = @team.members_id
+    @members.each do |id|
+      User.find(id).update(team_id: nil)
+    end
+    @team.destroy
     flash[:success] = "Отбор изтрит."
     redirect_to teams_url
   end

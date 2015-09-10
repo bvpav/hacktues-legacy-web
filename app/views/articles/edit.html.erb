@@ -1,0 +1,20 @@
+<% provide(:title, "Редактиране на статия") %>
+
+<h1>Редактиране на статия</h1>
+
+
+<%= form_for @article do |f| %>
+  <%= f.label :title, "Заглавие" %>
+  <%= f.text_field :title, class: 'form-control' %>
+  <%= f.label :published, class: "checkbox inline" do %>
+    <%= f.check_box :published %>
+    Публикувана
+  <% end %>
+  <%= f.cktext_area :content, :value => @article.content %>
+
+<div class="row">
+  <div class="col-md-2  col-md-offset-5">
+    <%= f.submit "Създай", class: "btn btn-primary"%>
+<% end %>
+  </div>
+</div>

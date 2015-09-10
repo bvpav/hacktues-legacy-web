@@ -4,7 +4,7 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Начало",   root_path %></li>
-        <li><%= link_to "Новини",   '#' %></li>
+        <li><%= link_to "Блог",   articles_path %></li>
 
         <% Page.all.each do |p| %>
           <% if p.in_nav? %>

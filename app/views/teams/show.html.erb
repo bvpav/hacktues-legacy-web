@@ -7,6 +7,8 @@
           <%= link_to "редактирай", "/teams/#{@team.id}/edit" %>
           <%= link_to "изтрий", "/teams/#{@team.id}", method: :delete,
                                       data: { confirm: "Сигурен?" } %>
+        <% elsif @team.members_id.include?(current_user.id) %>
+          <%= link_to "напусни", controller: "teams", action: "leave" %> 
         <% end %>
 
         <h2>Проект: <%= @team.project_name %></h2>
@@ -20,7 +22,7 @@
 
         <h2>Членове:</h2>
         <ul class="list-group">
-          <% @team.members_id.each do |id| %>
+          <% @members.each do |id| %>
             <li class="list-group-item"><%= link_to User.find(id).name, User.find(id) %></li>
           <% end %>
         </ul>
