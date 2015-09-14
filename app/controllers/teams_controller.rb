@@ -14,11 +14,11 @@ class TeamsController < ApplicationController
 
   def new
     @team = Team.new
-    @team.update(technologies: nil)
   end
 
   def create
     @team = Team.new(team_params)
+    @team.update(captain_id: session[:user_id])
     User.find(@team.captain_id).update(team_id: @team.id)
     if @team.save
       flash[:success] = "Успешно създаден отбор."
@@ -82,12 +82,11 @@ class TeamsController < ApplicationController
     end
     @team.destroy
     flash[:success] = "Отбор изтрит."
-    redirect_to root_url
+    redirect_to teams_path
   end
 
   def edit
     @team = Team.find(params[:id])
-    @team.update(technologies: nil)
   end
 
   def update
@@ -106,7 +105,7 @@ class TeamsController < ApplicationController
 
     def team_params
       params.require(:team).permit(:name, :project_name, :project_desc,
-                                   :captain_id, :technologies, :members_id)
+                                   :captain_id, :members_id)
     end
 
     def invite_params

@@ -10,6 +10,6 @@
 <%= f.text_area :project_desc, class: 'form-control' %>
 
 <%= f.label :technologies, "Технологии (всяка на нов ред)" %>
-<%= f.text_area :technologies, class: 'form-control' %>
+<%= f.text_area :technologies, class: 'form-control', value: "" %>
 
 <% f.hidden_field :captain_id, value: session[:id] %>
