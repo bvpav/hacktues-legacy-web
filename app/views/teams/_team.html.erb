@@ -1,4 +1,4 @@
-<li>
+<li class="list-group-item">
   <%= link_to team.name, "/teams/#{team.id}" %>
   <% if current_user && current_user.admin? %>
     <%= link_to "изтрий", "/teams/#{team.id}", method: :delete,
