@@ -30,6 +30,10 @@ textarea {
 
 /* typography */
 
+// h1, h2, h3, h4, h5, h6 {
+//   line-height: 1;
+// }
+//
 // h1 {
 //   font-size: 3em;
 //   letter-spacing: -2px;
@@ -51,7 +55,7 @@ textarea {
 //   line-height: 1.7em;
 // }
 
-//
+
 /* header */
 
 #logo {
@@ -62,6 +66,10 @@ textarea {
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 /* footer */
@@ -95,6 +103,34 @@ footer {
 
 .team_info {
   margin-top: 10px;
+}
+
+/* sidebar */
+
+aside {
+  section.user_info {
+    margin-top: 20px;
+  }
+  section {
+    padding: 10px 0;
+    margin-top: 20px;
+    &:first-child {
+      border: 0;
+      padding-top: 0;
+    }
+    span {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+    h1 {
+      font-size: 1.4em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+      margin-top: 0px;
+    }
+  }
 }
 
 .gravatar {
@@ -149,9 +185,13 @@ input {
   margin-left: 0;
 }
 
+.btn {
+  margin-top: 10px;
+}
+
 /* Users and teams index */
 
-.index {
+.users, .teams {
   list-style: none;
   margin: 0;
   li {
