@@ -16,7 +16,7 @@
 <%= f.number_field :number, within: 1..30, step: 1, class: 'form-control' %>
 
 <%= f.label :klas, "Клас" %>
-<%= f.select :klas, [8, 9, 10, 11, 12], class: 'form-control' %>
+<%= f.number_field :klas, within: 8..12, step: 1, class: 'form-control' %>
 
 <%= f.label :section, "Паралелка" %>
 <%= f.select :section, ['А','Б','В','Г'], class: 'form-control' %>
