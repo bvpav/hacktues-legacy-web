@@ -109,6 +109,7 @@ footer {
   padding-top: 5px;
   border-top: 1px solid $gray-medium-light;
   color: $gray-light;
+  text-align: center;
   a {
     color: $gray;
     &:hover {
@@ -117,16 +118,20 @@ footer {
   }
   small {
     float: left;
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
   ul {
-    float: right;
     list-style: none;
-    li {
-      float: left;
-      margin-left: 15px;
+    @media (min-width: 768px) {
+      float: right;
     }
-    @media (max-width: 768px) {
-      float: left;
+    li {
+      margin-left: 15px;
+      @media (min-width: 768px) {
+        display: inline;
+      }
     }
   }
 }
