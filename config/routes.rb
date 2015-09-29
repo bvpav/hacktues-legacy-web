@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'signup'     => 'users#new'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
+  post 'login/remote' => 'sessions#create_remote'
   delete 'logout'  => 'sessions#destroy'
   resources :users
   get 'users/:id/check' => 'users#check'

@@ -19,6 +19,7 @@ gem 'paperclip',               '4.3.0'
 gem 'barby',                   '0.6.1'
 gem 'rqrcode',                 '0.7.0'
 gem 'chunky_png',              '1.3.4'
+gem 'rack-cors', :require => 'rack/cors'
 gem 'sdoc',                    '0.4.0', group: :doc
 
 group :development, :test do
