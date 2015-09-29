@@ -19,8 +19,10 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     @team.update(captain_id: session[:user_id])
+    params[:team][:technologies] = params[:team][:technologies].split("\n")
     User.find(@team.captain_id).update(team_id: @team.id)
     if @team.save
+      @team.update(technologies: params[:team][:technologies])
       flash[:success] = "Успешно създаден отбор."
       redirect_to "/teams/#{@team.id}"
     else

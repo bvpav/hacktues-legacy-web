@@ -5,8 +5,8 @@ User.create!(name:  "Example Admin",
              admin: true,
              activated: true,
              activated_at: Time.zone.now,
-             number: 1,
-             klas: 1,
+             number: 15,
+             klas: 8,
              section: 'A')
 
  User.create!(name:  "Example User",

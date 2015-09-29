@@ -1,37 +1,53 @@
 <% provide(:title, @team.name) %>
 <div class="row">
-  <div class="col-md-4 col-md-offset-4">
-        <h1><%= @team.name %></h1>
+  <div class="col-md-6 col-md-offset-3">
+    <h1> Отбор "<%= @team.name %>"</h1>
 
-        <% if current_user == @captain %>
-          <%= link_to "редактирай", "/teams/#{@team.id}/edit" %>
-          <%= link_to "изтрий", "/teams/#{@team.id}", method: :delete,
-                                      data: { confirm: "Сигурен?" } %>
-        <% elsif @team.members_id.include?(current_user.id) %>
-          <%= link_to "напусни", controller: "teams", action: "leave" %> 
-        <% end %>
+    <% if current_user == @captain %>
+      <%= link_to "редактирай", "/teams/#{@team.id}/edit" %>
+      <%= link_to "изтрий", "/teams/#{@team.id}", method: :delete,
+                                  data: { confirm: "Сигурен?" } %>
+    <% elsif @team.members_id.include?(current_user.id) %>
+      <%= link_to "напусни", controller: "teams", action: "leave" %>
+    <% end %>
 
-        <h2>Проект: <%= @team.project_name %></h2>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Проект: <%= @team.project_name %></h3>
+      </div>
 
-        <div class="panel panel-default">
-          <div class="panel-heading">Описание:</div>
-          <div class="panel-body"><%= @team.project_desc %></div>
-        </div>
+      <div class="panel-body">
+        <h4><%= @team.project_desc %></h4>
 
-        <h2>Капитан: <%= link_to @captain.name, @captain %></h2>
-
-        <h2>Членове:</h2>
-        <ul class="list-group">
-          <% @members.each do |id| %>
-            <li class="list-group-item"><%= link_to User.find(id).name, User.find(id) %></li>
-          <% end %>
-        </ul>
-
-        <h2>Технологии:</h2>
-        <ul class="list-group">
-          <% @team.technologies.each do |t| %>
-            <li class="list-group-item"><%= t %></li>
-          <% end %>
-        </ul>
+        <table class="table table-user-information">
+          <tbody>
+            <tr>
+              <td>Капитан:</td>
+              <td><%= link_to @captain.name, @captain %></td>
+            </tr>
+            <tr>
+              <td>Членове:</td>
+              <td>
+                <ul class="list-group">
+                <% @members.each do |id| %>
+                  <li class="list-group-item"><%= link_to User.find(id).name, User.find(id) %></li>
+                <% end %>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>Технологии:</td>
+              <td>
+                <ul class="list-group">
+                <% @team.technologies.each do |t| %>
+                  <li class="list-group-item"><%= t %></li>
+                <% end %>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
