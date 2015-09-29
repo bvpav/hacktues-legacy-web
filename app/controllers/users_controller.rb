@@ -1,10 +1,28 @@
+require 'rqrcode'
+
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :show, :update, :destroy]
+  before_action :logged_in_user, only: [:edit, :show, :update, :destroy, :check]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
+  before_action :admin_user,     only: [:destroy, :check]
 
   def index
     @users = User.paginate(page: params[:page])
+  end
+
+  def check
+    @user = User.find(params[:id])
+    @day = Date.current.inspect.split(' ').second.to_i
+    if (@day = 29)
+      @user.update(day1: true)
+    elsif (@day = 10)
+      @user.update(day2: true)
+    elsif (@day = 11)
+      @user.update(day3: true)
+    end
+    @user.update(current_presence: false) if @user.current_presence == nil
+    @user.update(current_presence: !@user.current_presence)
+    flash[:success] = "Успешно чекиране на участник."
+    redirect_to user_path
   end
 
   def show
@@ -28,6 +46,7 @@ class UsersController < ApplicationController
     @current_user_team = Team.where(captain_id: current_user.id)
     get_team
     @invite = Invite.where(from_id: current_user.id, to_id: params[:id])
+    @barcode = RQRCode::QRCode.new(user_url + "/check", size: 5, level: :h)
   end
 
   def new
@@ -67,7 +86,10 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation, :number, :klas, :section)
+                                   :password_confirmation,
+                                   :number, :klas, :section,
+                                   :day1, :day2, :day3,
+                                   :current_presence)
     end
 
     # Before filters
