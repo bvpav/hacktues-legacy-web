@@ -10,7 +10,8 @@
   <% if current_user %>
     <%= link_to "Регистриран", current_user, class: "btn btn-lg btn-success" %>
   <% else %>
-    <%= link_to "Регистрирай се!", signup_path, class: "btn btn-lg btn-primary" %>
+    <!-- close sign-up -->
+    <%= link_to "Регистрацията приключи", "#", class: "btn btn-lg btn-danger disabled" %>
   <% end %>
 </div>
 

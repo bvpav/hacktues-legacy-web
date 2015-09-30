@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: [:destroy, :check]
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.paginate(page: params[:page]).order('name ASC')
     @participant_count = User.all.count - User.where(admin: true).size
   end
 

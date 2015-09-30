@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   get 'help'       => 'static_pages#help'
   get 'about'      => 'static_pages#about'
   get 'team'       => 'static_pages#team'
-  get 'signup'     => 'users#new'
+
+  # close sign-ups
+  # get 'signup'     => 'users#new'
+
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   post 'login/remote' => 'sessions#create_remote'
