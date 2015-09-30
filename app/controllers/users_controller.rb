@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     @current_user_team = Team.where(captain_id: current_user.id)
     get_team
     @invite = Invite.where(from_id: current_user.id, to_id: params[:id])
-    @barcode = RQRCode::QRCode.new(user_url + "/check", size: 5, level: :h)
+    @barcode = RQRCode::QRCode.new(user_url + "/check", size: 8, level: :h)
   end
 
   def new
