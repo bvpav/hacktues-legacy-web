@@ -60,13 +60,13 @@
           <% else %>
             <h4>Без отбор</h4>
             <% if current_user && current_user?(@user) %>
-              <%= link_to "Създай", new_team_path %>
+              <%= link_to "Създай", new_team_path, class: "btn btn-sm btn-info" %>
             <% elsif @invite.any? %>
               <%= link_to "Отмени покана", {:controller => :teams, :action =>
-              :cancel_invite, :from_id => current_user.id, :to_id => params[:id] }%>
+              :cancel_invite, :from_id => current_user.id, :to_id => params[:id] }, class: "btn btn-sm btn-danger" %>
             <% elsif @current_user_team.any? %>
               <%= link_to "Покани", {:controller => :teams, :action => :send_invite,
-              :from_id => current_user.id, :to_id => params[:id] }%>
+              :from_id => current_user.id, :to_id => params[:id] }, class: "btn btn-sm btn-success" %>
             <% else %>
               <span class="label label-default">
                 Създай си отбор, за да поканиш този участник.
