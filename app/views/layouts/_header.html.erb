@@ -15,7 +15,8 @@
         <li><%= link_to "Начало",   root_path %></li>
         <li><%= link_to "Участници", users_path %></li>
         <li><%= link_to "Отбори", teams_path %></li>
-        <li><%= link_to "Блог",   articles_path %></li>
+        <!-- Disable blog for now -->
+        <!-- <li><%= link_to "Блог",   articles_path %></li> -->
 
         <% Page.all.each do |p| %>
           <% if p.in_nav? %>
