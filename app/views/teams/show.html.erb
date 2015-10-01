@@ -3,14 +3,6 @@
   <div class="col-md-6 col-md-offset-3">
     <h1> Отбор "<%= @team.name %>"</h1>
 
-    <% if current_user == @captain %>
-      <%= link_to "редактирай", "/teams/#{@team.id}/edit" %>
-      <%= link_to "изтрий", "/teams/#{@team.id}", method: :delete,
-                                  data: { confirm: "Сигурен?" } %>
-    <% elsif @team.members_id.include?(current_user.id) %>
-      <%= link_to "напусни", controller: "teams", action: "leave" %>
-    <% end %>
-
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Проект: <%= @team.project_name %></h3>
@@ -47,6 +39,14 @@
             </tr>
           </tbody>
         </table>
+
+        <% if current_user == @captain %>
+          <%= link_to "Редактирай", "/teams/#{@team.id}/edit", class: "btn btn-sm btn-primary" %>
+          <%= link_to "Изтрий", "/teams/#{@team.id}", method: :delete,
+                                      data: { confirm: "Сигурен?" }, class: "btn btn-sm btn-primary" %>
+        <% elsif @team.members_id.include?(current_user.id) %>
+          <%= link_to "Напусни", controller: "teams", action: "leave", class: "btn btn-sm btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>
