@@ -3,8 +3,19 @@ class PagesController < ApplicationController
   before_action :admin_user,     only: [:create, :new, :edit, :update, :destroy]
 
   def show
-    get_page
-    page_published?
+    begin
+      @page = Page.friendly.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:warning] = "Страницата не е намерена."
+      redirect_to root_url
+      return
+    end
+    # Check if page is published or allow viewing if user is admin
+    unless (@page && @page.published?) || (current_user && current_user.admin)
+      flash[:warning] = "Страницата не е намерена."
+      redirect_to root_url
+      return
+    end
   end
 
   def new
@@ -44,24 +55,8 @@ class PagesController < ApplicationController
 
   private
 
-    def get_page
-      begin
-        @page = Page.friendly.find(params[:id])
-      rescue ActiveRecord::RecordNotFound
-        redirect_to root_url
-        return
-      end
-    end
-
     def page_params
       params.require(:page).permit(:title, :content, :in_nav, :published)
-    end
-
-    def page_published?
-      unless (@page && @page.published?) || (current_user && current_user.admin)
-        flash[:warning] = "Страницата не е намерена."
-        redirect_to root_url
-      end
     end
 
     # Confirms a logged-in user.
