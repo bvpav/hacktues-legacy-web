@@ -13,11 +13,12 @@ class UsersController < ApplicationController
   def check
     @user = User.find(params[:id])
     @day = Date.current.inspect.split(' ').second.to_i
-    if (@day = 29)
+    # change to @day == 9 before start of hackathon
+    if (@day)
       @user.update(day1: true)
-    elsif (@day = 10)
+    elsif (@day == 10)
       @user.update(day2: true)
-    elsif (@day = 11)
+    elsif (@day == 11)
       @user.update(day3: true)
     end
     @user.update(current_presence: false) if @user.current_presence == nil
