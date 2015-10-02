@@ -3,13 +3,7 @@ class PagesController < ApplicationController
   before_action :admin_user,     only: [:create, :new, :edit, :update, :destroy]
 
   def show
-    begin
-      @page = Page.friendly.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:warning] = "Страницата не е намерена."
-      redirect_to root_url
-      return
-    end
+    get_page
     # Check if page is published or allow viewing if user is admin
     unless (@page && @page.published?) || (current_user && current_user.admin)
       flash[:warning] = "Страницата не е намерена."
@@ -65,6 +59,16 @@ class PagesController < ApplicationController
         store_location
         flash[:danger] = "Влез в профила си."
         redirect_to login_url
+      end
+    end
+
+    def get_page
+      begin
+        @page = Page.friendly.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        flash[:warning] = "Страницата не е намерена."
+        redirect_to root_url
+        return
       end
     end
 
