@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
 		when "unactivated"
 			redirect_to root_url
     when false
-			render 'new'
+			render 'wrong user data'
 		end
 	end
 
