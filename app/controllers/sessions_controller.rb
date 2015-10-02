@@ -30,26 +30,23 @@ class SessionsController < ApplicationController
 		user = create_base
 
 		case user
-			when User
-				redirect_back_or user
-
-			when "unactivated"
-				redirect_to root_url
-
-			when false
-				render 'new'
+		when User
+			redirect_back_or user
+		when "unactivated"
+			redirect_to root_url
+    when false
+			render 'new'
 		end
 	end
 
-	def create_remote
+  def create_remote
 		user = create_base
 
 		case user
-			when User
-				render :json => user
-
-			else
-				render "penis"
+		when User
+			render :json => user
+		else
+			render "penis"
 		end
 	end
 
