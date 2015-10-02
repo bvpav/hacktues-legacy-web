@@ -46,7 +46,7 @@ class SessionsController < ApplicationController
 		when User
 			render :json => user
 		else
-			render "penis"
+			render "wrong user data"
 		end
 	end
 
