@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
 		when "unactivated"
 			redirect_to root_url
     when false
-			render 'wrong user data'
+			render 'new'
 		end
 	end
 
@@ -46,7 +46,7 @@ class SessionsController < ApplicationController
 		when User
 			render :json => user
 		else
-			render "penis"
+			render "wrong user data"
 		end
 	end
 
