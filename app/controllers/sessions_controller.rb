@@ -52,7 +52,7 @@ class SessionsController < ApplicationController
 
 
 			else
-				render "penis"
+				render "wrong user data"
 		end
 	end
 
