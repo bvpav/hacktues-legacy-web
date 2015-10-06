@@ -30,28 +30,45 @@ class SessionsController < ApplicationController
 		user = create_base
 
 		case user
-		when User
-			redirect_back_or user
-		when "unactivated"
-			redirect_to root_url
-    when false
-			render 'new'
+			when User
+				redirect_back_or user
+
+			when "unactivated"
+				redirect_to root_url
+
+			when false
+				render 'new'
 		end
 	end
 
-  def create_remote
+	def create_remote
 		user = create_base
 
 		case user
-		when User
-			render :json => user
-		else
-			render "wrong user data"
+			when User
+        team = get_team(user)
+        result = {"team" => team, "user" => user}
+				render :json => result
+
+
+			else
+				render "penis"
 		end
 	end
 
   def destroy
     log_out if logged_in?
     redirect_to root_url
+  end
+
+  private
+
+  def get_team(user)
+    begin
+      team = Team.find(user.team_id)
+    rescue ActiveRecord::RecordNotFound
+      team = false
+    end
+    return team
   end
 end
