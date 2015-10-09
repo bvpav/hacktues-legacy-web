@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @day = Date.current.inspect.split(' ').second.to_i
     # change to @day == 9 before start of hackathon
-    if (@day)
+    if (@day == 9)
       @user.update(day1: true)
     elsif (@day == 10)
       @user.update(day2: true)
