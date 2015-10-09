@@ -46,11 +46,11 @@
           </tbody>
         </table>
 
-        <% if current_user == @captain || current_user.admin? %>
+        <% if current_user && (current_user == @captain || current_user.admin?) %>
           <%= link_to "Редактирай", "/teams/#{@team.id}/edit", class: "btn btn-sm btn-primary" %>
           <%= link_to "Изтрий", "/teams/#{@team.id}", method: :delete,
                                       data: { confirm: "Сигурен?" }, class: "btn btn-sm btn-primary" %>
-        <% elsif @team.members_id.include?(current_user.id) %>
+        <% elsif current_user && @team.members_id.include?(current_user.id) %>
           <%= link_to "Напусни", controller: "teams", action: "leave", class: "btn btn-sm btn-primary" %>
         <% end %>
       </div>
