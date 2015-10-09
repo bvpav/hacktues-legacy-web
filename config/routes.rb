@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   resources :users
   get 'users/:id/check' => 'users#check'
+  get 'users/:id/declaration' => 'users#declaration'
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :teams

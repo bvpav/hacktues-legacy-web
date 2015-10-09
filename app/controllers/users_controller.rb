@@ -27,6 +27,14 @@ class UsersController < ApplicationController
     redirect_to user_path
   end
 
+  def declaration
+    @user = User.find(params[:id])
+    @user.update(declaration: false) if @user.declaration == nil
+    @user.update(declaration: !@user.declaration)
+    flash[:success] = "Успешно отбелязване на декларация."
+    redirect_to user_path
+  end
+
   def show
     @user = User.find(params[:id])
     if @user == current_user && @user.team_id == nil
