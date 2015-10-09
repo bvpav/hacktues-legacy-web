@@ -39,6 +39,11 @@
         <div class="tab-pane fade in active center" id="tab1">
           <% if current_user && current_user.admin? %>
             <%= @user.created_at %>
+            <% if @user.declaration %>
+              <p>Пича има декларация.</p>
+            <% elsif %>
+              <p>Пича няма декларация.</p>
+            <% end %>
           <% end %>
           <% if current_user && current_user?(@user) %>
             <h6>QR код за чекиране</h6>
