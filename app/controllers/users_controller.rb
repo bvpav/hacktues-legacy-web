@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def index
     @users = User.paginate(page: params[:page]).order('name ASC')
     @participant_count = User.all.count - User.where(admin: true).size
+    @checked_count = User.where(current_presence: true).count
   end
 
   def check

@@ -1,7 +1,7 @@
 <% provide(:title, 'Всички участници') %>
 <h1>Всички участници
   <% if current_user && current_user.admin? %>
-    (Брой: <%= @participant_count %>)
+    (Брой: <%= @checked_count %>/<%= @participant_count %>)
   <% end %>
 </h1>
 
