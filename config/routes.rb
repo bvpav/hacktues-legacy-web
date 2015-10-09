@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   get 'about'      => 'static_pages#about'
   get 'team'       => 'static_pages#team'
 
-  # close sign-ups
-  # get 'signup'     => 'users#new'
+  get 'signup'     => 'users#new'
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'

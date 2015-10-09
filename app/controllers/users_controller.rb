@@ -1,9 +1,9 @@
 require 'rqrcode'
 
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :show, :update, :destroy, :check]
+  before_action :logged_in_user, only: [:new, :create, :edit, :show, :update, :destroy, :check]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: [:destroy, :check]
+  before_action :admin_user,     only: [:new, :create, :destroy, :check]
 
   def index
     @users = User.paginate(page: params[:page]).order('name ASC')
