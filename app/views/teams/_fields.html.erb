@@ -1,20 +1,20 @@
 <%= render 'error_messages' %>
 
-<%= f.label :name, "Име" %>
-<%= f.text_field :name, class: 'form-control' %>
-
-<%= f.label :project_name, "Проект" %>
-<%= f.text_field :project_name, class: 'form-control' %>
-
-<%= f.label :project_desc, "Описание" %>
-<%= f.text_area :project_desc, class: 'form-control' %>
-
-<%= f.label :technologies, "Технологии (всяка на нов ред)" %>
-<%= f.text_area :technologies, class: 'form-control', value: "" %>
-
 <% if current_user && current_user.admin? %>
   <%= f.label :room, "Стая" %>
   <%= f.number_field :room, within: 11..47, step: 1, class: "form-control" %>
-<% end %>
+<% elsif %>
+  <%= f.label :name, "Име" %>
+  <%= f.text_field :name, class: 'form-control' %>
 
-<% f.hidden_field :captain_id, value: session[:id] %>
+  <%= f.label :project_name, "Проект" %>
+  <%= f.text_field :project_name, class: 'form-control' %>
+
+  <%= f.label :project_desc, "Описание" %>
+  <%= f.text_area :project_desc, class: 'form-control' %>
+
+  <%= f.label :technologies, "Технологии (всяка на нов ред)" %>
+  <%= f.text_area :technologies, class: 'form-control', value: "" %>
+
+  <% f.hidden_field :captain_id, value: session[:id] %>
+<% end %>

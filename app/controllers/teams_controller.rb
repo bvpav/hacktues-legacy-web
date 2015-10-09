@@ -93,13 +93,20 @@ class TeamsController < ApplicationController
 
   def update
     @team = Team.find(params[:id])
-    params[:team][:technologies] = params[:team][:technologies].split("\n")
-    if @team.update_attributes(team_params)
-      @team.update(technologies: params[:team][:technologies])
-      flash[:success] = "Успешно обновяване на отбора."
-      redirect_to "/teams/#{@team.id}"
+    if current_user.admin?
+      if @team.update(room: params[:team][:room])
+        flash[:success] = "Успешно обновяване на стая."
+        redirect_to "/teams/#{@team.id}"
+      end
     else
-      render 'edit'
+      params[:team][:technologies] = params[:team][:technologies].split("\n")
+      if @team.update_attributes(team_params)
+        @team.update(technologies: params[:team][:technologies])
+        flash[:success] = "Успешно обновяване на отбора."
+        redirect_to "/teams/#{@team.id}"
+      else
+        render 'edit'
+      end
     end
   end
 
