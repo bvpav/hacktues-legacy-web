@@ -12,4 +12,9 @@
 <%= f.label :technologies, "Технологии (всяка на нов ред)" %>
 <%= f.text_area :technologies, class: 'form-control', value: "" %>
 
+<% if current_user && current_user.admin? %>
+  <%= f.label :room, "Стая" %>
+  <%= f.number_field :room, within: 11..47, step: 1, class: "form-control" %>
+<% end %>
+
 <% f.hidden_field :captain_id, value: session[:id] %>

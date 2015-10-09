@@ -37,10 +37,16 @@
                 </ul>
               </td>
             </tr>
+            <tr>
+              <td>Стая:</td>
+              <td>
+                <% @team.room %>
+              </td>
+            </tr>
           </tbody>
         </table>
 
-        <% if current_user == @captain %>
+        <% if current_user == @captain || current_user.admin? %>
           <%= link_to "Редактирай", "/teams/#{@team.id}/edit", class: "btn btn-sm btn-primary" %>
           <%= link_to "Изтрий", "/teams/#{@team.id}", method: :delete,
                                       data: { confirm: "Сигурен?" }, class: "btn btn-sm btn-primary" %>
