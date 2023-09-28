@@ -1,14 +1,2 @@
 <% provide(:title, 'Всички участници') %>
-<h1>Всички участници
-  <% if current_user && current_user.admin? %>
-    (Брой: <%= @checked_count %>/<%= @participant_count %>)
-  <% end %>
-</h1>
-
-<%= will_paginate %>
-
-<ul class="list-group index">
-      <%= render @users %>
-</ul>
-
-<%= will_paginate %>
+<h1>Всички участници</h1>
