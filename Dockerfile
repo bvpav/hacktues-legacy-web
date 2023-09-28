@@ -1,8 +1,16 @@
 FROM ruby:2.2.2
 
 # `rails/execjs` изисква Node.js
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt update && apt install -y nodejs && rm -rf /var/lib/apt/lists/*
+RUN cd /tmp && \
+    wget https://nodejs.org/dist/v16.20.0/node-v16.20.0-linux-x64.tar.xz && \
+    tar -xJf node-v16.20.0-linux-x64.tar.xz && \
+    mv node-v16.20.0-linux-x64/bin/* /usr/bin && \
+    mv node-v16.20.0-linux-x64/include/* /usr/include && \
+    mv node-v16.20.0-linux-x64/lib/* /usr/lib && \
+    mv node-v16.20.0-linux-x64/share/doc/* /usr/share/doc && \
+    mv node-v16.20.0-linux-x64/share/man/man1/* /usr/share/man/man1 && \
+    mv node-v16.20.0-linux-x64/share/systemtap/* /usr/share/systemtap && \
+    rm -rf node-v16.20.0-linux-x64  node-v16.20.0-linux-x64.tar.xz
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
