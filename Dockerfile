@@ -22,5 +22,8 @@ RUN bundle install
 
 COPY . .
 
+RUN rake db:migrate
+RUN rake db:seed
+
 EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
