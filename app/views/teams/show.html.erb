@@ -22,7 +22,7 @@
               <td>
                 <ul class="list-group">
                 <% @members.each do |id| %>
-                  <li class="list-group-item"><%= link_to User.find(id).name, User.find(id) %></li>
+                  <li class="list-group-item"><%= User.find(id).name %></li>
                 <% end %>
                 </ul>
               </td>
